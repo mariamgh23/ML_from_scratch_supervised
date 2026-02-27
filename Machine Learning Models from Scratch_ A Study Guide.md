@@ -20,7 +20,15 @@ This report summarizes the implementations of various machine learning models fr
 
 **Illustration:**
 
-![Linear Regression Process](/home/ubuntu/diagrams.png "Linear Regression Process")
+graph TD
+    A[Start: Initialize Weights theta=0] --> B[Add Bias Column to X]
+    B --> C[Loop for n_iter]
+    C --> D[Calculate Predictions: y_pred = X * theta]
+    D --> E[Calculate Error: error = y_pred - y]
+    E --> F[Calculate Gradient: 2/m * X.T * error]
+    F --> G[Update Weights: theta = theta - lr * gradient]
+    G --> C
+    C --> H[End: Return Trained theta]
 
 ### 2. Logistic Regression
 
@@ -48,7 +56,12 @@ This report summarizes the implementations of various machine learning models fr
 
 **Illustration:**
 
-![Logistic Regression Sigmoid](/home/ubuntu/diagrams.png "Logistic Regression Sigmoid")
+graph LR
+    Z[Linear Combination: z = Xw + b] --> S[Sigmoid Function: 1 / 1 + e^-z]
+    S --> P[Probability: 0 to 1]
+    P --> C{Threshold 0.5}
+    C -->|Greater than or equal to 0.5| Class1[Class 1]
+    C -->|Less than 0.5| Class0[Class 0]
 
 ### 3. Simple Decision Tree
 
@@ -66,7 +79,16 @@ This report summarizes the implementations of various machine learning models fr
 
 **Illustration:**
 
-![Decision Tree Split Logic](/home/ubuntu/diagrams.png "Decision Tree Split Logic")
+graph TD
+    Root[Current Node] --> Split{Find Best Split}
+    Split -->|Feature i, Threshold t| Left[Left Child: X_i <= t]
+    Split -->|Feature i, Threshold t| Right[Right Child: X_i > t]
+    Left --> LeafL{Is Pure?}
+    Right --> LeafR{Is Pure?}
+    LeafL -->|Yes| LabelL[Assign Label]
+    LeafL -->|No| RecL[Recursive Fit]
+    LeafR -->|Yes| LabelR[Assign Label]
+    LeafR -->|No| RecR[Recursive Fit]
 
 ### 4. Random Forest
 
@@ -83,8 +105,17 @@ This report summarizes the implementations of various machine learning models fr
     - Uses `collections.Counter` to perform a majority vote among the tree predictions to determine the final class label.
 
 **Illustration:**
-
-![Random Forest Architecture](/home/ubuntu/diagrams.png "Random Forest Architecture")
+graph TD
+    Data[Original Dataset] --> B1[Bootstrap Sample 1]
+    Data --> B2[Bootstrap Sample 2]
+    Data --> BN[Bootstrap Sample N]
+    B1 --> T1[Decision Tree 1]
+    B2 --> T2[Decision Tree 2]
+    BN --> TN[Decision Tree N]
+    T1 --> V[Majority Voting]
+    T2 --> V
+    TN --> V
+    V --> Final[Final Prediction]
 
 ### 5. Support Vector Machine (SVM)
 
@@ -112,7 +143,12 @@ This report summarizes the implementations of various machine learning models fr
 
 **Illustration:**
 
-![SVM Hinge Loss Update](/home/ubuntu/diagrams.png "SVM Hinge Loss Update")
+graph TD
+    Start[Check Condition] --> Cond{y * Xw + b >= 1}
+    Cond -->|True: Correct & Outside Margin| Update1[dw = w, db = 0]
+    Cond -->|False: Inside Margin or Misclassified| Update2[dw = w - C * y * X, db = -C * y]
+    Update1 --> Step[w = w - lr * dw, b = b - lr * db]
+    Update2 --> Step
 
 ### 6. XGBoost
 
@@ -132,9 +168,7 @@ This report summarizes the implementations of various machine learning models fr
     - Aggregates predictions from all trees for each class.
     - The class with the highest aggregated prediction score is chosen as the final prediction.
 
-**Illustration:**
 
-![XGBoost Process](/home/ubuntu/diagrams.png "XGBoost Process")
 
 ## Conclusion
 This report has provided an overview of several fundamental machine learning algorithms implemented from scratch. Understanding these implementations offers valuable insights into the inner workings of these powerful models, from the iterative optimization of Linear and Logistic Regression to the ensemble power of Random Forests and the error-correcting nature of XGBoost. The provided illustrations aim to further clarify the core mechanisms of each algorithm, serving as a useful study reference.
