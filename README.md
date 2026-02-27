@@ -133,6 +133,7 @@ Confusion Matrix:
  [ 0  1  9]]
 F1 Score: 0.93
 ```
+---
 ### 🧮 Mathematical Foundations Covered
 
 * Gradient Descent
@@ -150,6 +151,7 @@ F1 Score: 0.93
 * Boosting
 
 * One-vs-Rest Strategy
+---
 
 ### 🚀 Why This Repository Is Valuable
 
@@ -172,6 +174,7 @@ F1 Score: 0.93
 * Early stopping
 
 * Cross-validation implementation
+---
 
 ### 🤝 Contributions
 
@@ -187,10 +190,13 @@ Add new ML algorithms
 
 Enhance documentation
 
+---
 
 ### 📜 License
 
 This project is licensed under the MIT License.
+
+---
 
 ### ⭐ If You Like This Project
 
